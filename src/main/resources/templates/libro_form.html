@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html> 
+    <head>
+        <title>formulario libro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <form action="/libro/registro" method="POST">
+
+                <div class="mb-3">
+                    <label for="isbn" class="form-label">ISBN</label>
+                    <input type="number" class="form-control" name="isbn" placeholder="ingrese el isbn" >
+                </div>
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">TITULO</label>
+                    <input type="text" class="form-control" name="titulo" placeholder="ingrese el titulo" >
+                </div>
+                <div class="mb-3">
+                    <label for="ejemplares" class="form-label">EJEMPLARES</label>
+                    <input type="number" class="form-control" name="ejemplares" placeholder="ingrese la cantidad de ejemplares" >
+                </div>
+                
+                <div class="mb-3">
+                    <select name="idAutor" class="form-select" aria-label="Default select example">
+                      <option> autor </option>
+                        <option th:each="autor : ${autores}"
+                                th:value="${autor.id}"
+                                th:text="${autor.nombre}"/>
+                  
+                    </select>
+                </div>  
+                <div class="mb-3">
+                    <select name="idEditorial" class="form-select" aria-label="Default select example">
+                    <option> editorial </option>
+                        <option th:each="editorial : ${editoriales}"
+                                th:value="${editorial.id}"
+                                th:text="${editorial.nombre}"/>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+
+
+            </form>
+
+            
+            <div class="container">
+                <div th:if="${error != null}" class="card text-bg-danger mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p th:text="${error}" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
